@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es" data-view="payment-system">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ParkSys | Gestión de Transacciones</title>
+    <link rel="stylesheet" href="/css/trasaccion.css">
+</head>
+<body class="payment-view">
+    <div class="app-frame">
+        <header class="payment-header">
+            <div class="header-content">
+                <div class="title-group">
+                    <h1 class="app-title">Autos Colombia</h1>
+                    <h2 class="page-title">Gestión de Transacciones</h2>
+                </div>
+                
+                <nav class="context-nav">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">
+                                <i class="fas fa-home"></i>
+                                <span>Inicio</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="movimiento.html" class="nav-link">
+                                <i class="fas fa-car"></i>
+                                <span>Movimientos</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="administracion.html" class="nav-link">
+                                <i class="fas fa-users"></i>
+                                <span>Administración</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <main class="payment-container">
+            <!-- Panel de procesamiento de pagos -->
+            <section class="payment-processor" aria-labelledby="payment-section-title">
+                <div class="section-header">
+                    <h2 id="payment-section-title">Procesamiento de Transacciones</h2>
+                    <div class="status-badge" id="payment-status"></div>
+                </div>
+                
+                <div class="payment-details" id="vehicle-payment-info">
+                    <div class="detail-row">
+                        <span class="detail-label">Placa:</span>
+                        <span class="detail-value" id="info-plate">ABC123</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Tiempo:</span>
+                        <span class="detail-value" id="info-time">2h 15m</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Tarifa:</span>
+                        <span class="detail-value" id="info-rate">$5,000/h</span>
+                    </div>
+                </div>
+                
+                <form id="transaction-form" class="payment-form">
+                    <input type="hidden" id="transaction-identifier">
+                    
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="transaction-amount" class="input-label">Importe</label>
+                            <div class="input-currency">
+                                <span class="currency-symbol">$</span>
+                                <input type="text" 
+                                       id="transaction-amount" 
+                                       class="currency-input" 
+                                       readonly
+                                       aria-describedby="amount-help">
+                            </div>
+                            <small id="amount-help" class="input-note">Calculado automáticamente</small>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="payment-method" class="input-label">Medio de Pago</label>
+                            <select id="payment-method" class="select-input" required>
+                                <option value="" disabled selected>Seleccione...</option>
+                                <option value="cash">Efectivo</option>
+                                <option value="credit_card">Tarjeta Crédito</option>
+                                <option value="debit_card">Tarjeta Débito</option>
+                                <option value="bank_transfer">Transferencia</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="input-group full-width">
+                            <label for="transaction-notes" class="input-label">Observaciones</label>
+                            <textarea id="transaction-notes" 
+                                      class="text-input" 
+                                      rows="2"
+                                      maxlength="200"
+                                      aria-describedby="notes-help"></textarea>
+                            <small id="notes-help" class="input-note">Máx. 200 caracteres</small>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="action-button success">
+                            <i class="fas fa-check"></i>
+                            <span>Confirmar Pago</span>
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Historial de transacciones -->
+            <section class="transaction-history" aria-labelledby="history-section-title">
+                <div class="section-header">
+                    <h2 id="history-section-title">Registro de Transacciones</h2>
+                    
+                    <div class="filter-controls">
+                        <div class="filter-tabs">
+                            <button class="filter-tab active" data-filter="all" aria-label="Mostrar todos los registros">
+                                <span>Todos</span>
+                            </button>
+                            <button class="filter-tab" data-filter="completed" aria-label="Mostrar pagos completados">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Completados</span>
+                            </button>
+                            <button class="filter-tab" data-filter="pending" aria-label="Mostrar pagos pendientes">
+                                <i class="fas fa-clock"></i>
+                                <span>Pendientes</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="table-wrapper">
+                    <table id="transactions-table" class="responsive-table">
+                        <thead>
+                            <tr>
+                                <th data-column="date">Fecha/Hora</th>
+                                <th data-column="plate">Placa</th>
+                                <th data-column="client">Cliente</th>
+                                <th data-column="amount">Importe</th>
+                                <th data-column="status">Estado</th>
+                                <th data-column="method">Método</th>
+                                <th data-column="actions" class="text-right">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Scripts -->
+    <script type="module" src="/js/transacciones.js"></script>
+</body>
+</html>
