@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es" data-app="parking-system">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>ParkSys | Control de Accesos</title>
+    <link rel="stylesheet" href="/css/movimiento.css">
+</head>
+<body class="access-control-view">
+    <div class="app-layout">
+        <header class="app-bar">
+            <div class="app-branding">
+                <h1 class="app-title">Autos Colombia</h1>
+                <p class="app-context">Control de Accesos Vehiculares</p>
+            </div>
+            
+            <nav class="context-nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">
+                            <i class="fas fa-home"></i>
+                            <span>Inicio</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="administracion.html" class="nav-link">
+                            <i class="fas fa-users"></i>
+                            <span>Administración</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="transaccion.html" class="nav-link">
+                            <i class="fas fa-car"></i>
+                            <span>Transacciones</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="app-content">
+            <div class="card-container">
+                <!-- Panel de Búsqueda -->
+                <section class="control-panel" aria-labelledby="search-header">
+                    <header class="panel-header">
+                        <h2 id="search-header">Consulta de Vehículos</h2>
+                    </header>
+                    <div class="panel-body">
+                        <form id="vehicle-query" class="inline-form">
+                            <div class="input-group">
+                                <label for="vehicle-plate" class="input-label">Identificación</label>
+                                <div class="input-combo">
+                                    <input type="text" 
+                                           id="vehicle-plate" 
+                                           class="input-field" 
+                                           placeholder="Ingrese placa"
+                                           pattern="[A-Za-z0-9]{3,10}"
+                                           aria-describedby="plate-format">
+                                    <button type="submit" class="action-button primary">
+                                        <span class="icon-search">🔍</span>
+                                        <span>Localizar</span>
+                                    </button>
+                                </div>
+                                <small id="plate-format" class="input-hint">Formato: ABC123 o similar</small>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Resultados de Búsqueda -->
+                <section id="query-results" class="hidden" aria-live="polite">
+                    <div class="results-card">
+                        <header class="results-header">
+                            <h3>Datos del Vehículo</h3>
+                            <button id="checkout-action" class="action-button success">
+                                <span class="icon-exit">🚪</span>
+                                <span>Procesar Salida</span>
+                            </button>
+                        </header>
+                        <div id="vehicle-details" class="details-grid">
+                            <!-- Contenido dinámico se insertará aquí -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Registro de Entrada -->
+                <section class="control-panel" aria-labelledby="entry-header">
+                    <header class="panel-header">
+                        <h2 id="entry-header">Registro de Ingreso</h2>
+                    </header>
+                    <div class="panel-body">
+                        <form id="checkin-form" class="vertical-form">
+                            <div class="input-group">
+                                <label for="checkin-plate" class="input-label">Placa del Vehículo</label>
+                                <input type="text" 
+                                       id="checkin-plate" 
+                                       class="input-field" 
+                                       required
+                                       pattern="[A-Za-z0-9]{3,10}">
+                            </div>
+                            
+                            <div class="input-group">
+                                <label for="parking-slot" class="input-label">Espacio Asignado</label>
+                                <select id="parking-slot" class="input-select" required>
+                                    <option value="" disabled selected>Cargando espacios...</option>
+                                </select>
+                            </div>
+                            
+                            <button type="submit" class="action-button">
+                                <span class="icon-checkin">✅</span>
+                                <span>Registrar Ingreso</span>
+                            </button>
+                        </form>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Listado Actual -->
+            <section class="data-section" aria-labelledby="current-header">
+                <header class="section-header">
+                    <h2 id="current-header">Vehículos en Instalaciones</h2>
+                    <button id="refresh-list" class="icon-button" aria-label="Actualizar listado">
+                        <span class="icon-refresh">🔄</span>
+                    </button>
+                </header>
+                
+                <div class="scroll-container">
+                    <table id="current-vehicles" class="data-grid">
+                        <thead>
+                            <tr>
+                                <th scope="col">Placa</th>
+                                <th scope="col">Ubicación</th>
+                                <th scope="col">Ingreso</th>
+                                <th scope="col" class="actions-column">Operaciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Datos dinámicos se insertarán aquí -->
+                            <tr>
+                                <td>ABC123</td>
+                                <td>A1</td>
+                                <td>10:30 AM</td>
+                                <td>
+                                    <button class="action-button small">Editar</button>
+                                    <button class="action-button small danger">Eliminar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>XYZ789</td>
+                                <td>M2</td>
+                                <td>11:45 AM</td>
+                                <td>
+                                    <button class="action-button small">Editar</button>
+                                    <button class="action-button small danger">Eliminar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="/js/movimientos.js"></script>
+</body>
+</html>

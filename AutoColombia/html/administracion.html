@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es" data-view="management-system">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ParkSys | Administración de Recursos</title>
+    <link rel="stylesheet" href="/css/administracion.css">
+  
+</head>
+<body class="resource-management">
+    <div class="app-frame">
+        <header class="management-header">
+            <div class="header-content">
+                <div class="title-group">
+                    <h1 class="app-title">Autos Colombia</h1>
+                    <h2 class="page-title">Administración de Recursos</h2>
+                </div>
+                
+                <nav class="context-nav">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">
+                                <i class="fas fa-home"></i>
+                                <span>Inicio</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="movimiento.html" class="nav-link">
+                                <i class="fas fa-car"></i>
+                                <span>Movimientos</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="transaccion.html" class="nav-link">
+                                <i class="fas fa-users"></i>
+                                <span>Transacciones</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <main class="management-dashboard">
+            <!-- Panel de Usuarios -->
+            <section class="management-panel user-management" aria-labelledby="users-panel-title">
+                <header class="panel-header">
+                    <h2 id="users-panel-title">
+                        <i class="fas fa-users"></i>
+                        <span>Gestión de Clientes</span>
+                    </h2>
+                    <button id="new-user-btn" class="action-button">
+                        <i class="fas fa-plus"></i>
+                        <span>Nuevo Cliente</span>
+                    </button>
+                </header>
+                
+                <!-- Formulario de Usuario (inicialmente oculto) -->
+                <div id="user-form-container" class="form-container hidden">
+                    <form id="client-form" class="card-form">
+                        <input type="hidden" id="client-id">
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="client-name" class="form-label">Nombre Completo</label>
+                                <input type="text" 
+                                       id="client-name" 
+                                       class="form-input" 
+                                       required
+                                       minlength="3"
+                                       aria-describedby="name-help">
+                                <small id="name-help" class="form-hint">Mínimo 3 caracteres</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="client-phone" class="form-label">Teléfono</label>
+                                <input type="tel" 
+                                       id="client-phone" 
+                                       class="form-input" 
+                                       required
+                                       pattern="[0-9]{7,15}"
+                                       aria-describedby="phone-help">
+                                <small id="phone-help" class="form-hint">Formato: 1234567890</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="client-vehicle" class="form-label">Placa Vehicular</label>
+                                <input type="text" 
+                                       id="client-vehicle" 
+                                       class="form-input" 
+                                       required
+                                       pattern="[A-Za-z0-9]{3,10}">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="vehicle-type" class="form-label">Tipo de Vehículo</label>
+                                <select id="vehicle-type" class="form-select" required>
+                                    <option value="" disabled selected>Seleccione...</option>
+                                    <option value="car">Automóvil</option>
+                                    <option value="motorcycle">Motocicleta</option>
+                                    <option value="bicycle">Bicicleta</option>
+                                    <option value="truck">Vehículo Pesado</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="payment-plan" class="form-label">Plan de Pago</label>
+                                <select id="payment-plan" class="form-select" required>
+                                    <option value="" disabled selected>Seleccione...</option>
+                                    <option value="monthly">Mensualidad</option>
+                                    <option value="daily">Pago Diario</option>
+                                    <option value="occasional">Uso Ocasional</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="action-button success">
+                                <i class="fas fa-save"></i>
+                                <span>Guardar</span>
+                            </button>
+                            <button type="button" id="cancel-user" class="action-button danger">
+                                <i class="fas fa-times"></i>
+                                <span>Cancelar</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Tabla de Usuarios -->
+                <div class="table-responsive">
+                    <table id="clients-table" class="data-table">
+                        <thead>
+                            <tr>
+                                <th data-column="name">Nombre</th>
+                                <th data-column="contact">Contacto</th>
+                                <th data-column="vehicle">Vehículo</th>
+                                <th data-column="type">Tipo</th>
+                                <th data-column="plan">Plan</th>
+                                <th data-column="actions" class="actions-col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Datos dinámicos -->
+                            
+                
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Panel de Espacios -->
+            <section class="management-panel space-management" aria-labelledby="spaces-panel-title">
+                <header class="panel-header">
+                    <h2 id="spaces-panel-title">
+                        <i class="fas fa-parking"></i>
+                        <span>Administración de Espacios</span>
+                    </h2>
+                    <div class="space-summary">
+                        <span id="available-spaces">12 disponibles</span>
+                        <span id="total-spaces">de 24 totales</span>
+                    </div>
+                </header>
+                
+                <!-- Grid de Espacios -->
+                <div id="parking-grid" class="interactive-grid">
+                    
+                </div>
+                
+                <!-- Formulario para nuevo espacio -->
+                <form id="space-form" class="inline-form">
+                    <div class="form-combo">
+                        <select id="space-type" class="form-select" required>
+                            <option value="" disabled selected>Tipo de Espacio</option>
+                            <option value="car">Automóvil</option>
+                            <option value="motorcycle">Motocicleta</option>
+                            <option value="bicycle">Bicicleta</option>
+                            <option value="truck">Vehículo Pesado</option>
+                        </select>
+                        
+                        <button type="submit" class="action-button">
+                            <i class="fas fa-plus-circle"></i>
+                            <span>Agregar Espacio</span>
+                        </button>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Scripts -->
+    <script type="module" src="/js/administracciones.js"></script>
+</body>
+</html>

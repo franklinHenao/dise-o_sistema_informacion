@@ -1,0 +1,110 @@
+/* Reset y estilos base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #f5f7fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Contenedor principal */
+.dashboard-container {
+    text-align: center;
+    max-width: 800px;
+    width: 100%;
+    padding: 40px;
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Encabezado */
+.header {
+    margin-bottom: 40px;
+}
+
+.header h1 {
+    color: #003366;
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.header p {
+    color: #555;
+    font-size: 18px;
+}
+
+/* Tarjetas de funciones */
+.cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.card {
+    background-color: #f8fafc;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid #e2e8f0;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card h2 {
+    color: #003366;
+    margin-bottom: 10px;
+    font-size: 22px;
+}
+
+.card p {
+    color: #555;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.card a {
+    display: inline-block;
+    padding: 10px 25px;
+    background-color: #0055aa;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.card a:hover {
+    background-color: #0077cc;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .dashboard-container {
+        padding: 30px 20px;
+    }
+    
+    .header h1 {
+        font-size: 28px;
+    }
+    
+    .header p {
+        font-size: 16px;
+    }
+    
+    .card {
+        padding: 20px 15px;
+    }
+}
